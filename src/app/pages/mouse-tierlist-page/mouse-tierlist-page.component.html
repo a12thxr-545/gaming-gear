@@ -1,0 +1,107 @@
+<div class="page">
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-badge">🖱️ Gaming Mice</div>
+      <h1 class="page-title font-premium">Mouse Tierlist</h1>
+      <p class="page-desc">
+        Curated gaming mice ranked by performance, shape, value, and ergonomics.
+        All featured models leverage industry-standard 3395 sensors or better.
+      </p>
+      <p class="page-meta">Updated: June 2026 · Source: Ponnie Review</p>
+    </div>
+  </div>
+
+  <!-- Filters & Search Bar -->
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <div class="filter-group">
+        <span class="filter-label">Category</span>
+        <div class="filter-buttons">
+          <button
+            *ngFor="let filter of filters"
+            class="filter-btn"
+            [class.active]="activeFilter === filter.value"
+            (click)="setFilter(filter.value)"
+            [id]="'filter-mouse-' + filter.value">
+            {{ filter.label }}
+          </button>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search mouse name or shape..."
+          (input)="onSearch($event)"
+          id="mouse-search"
+        />
+      </div>
+      <span class="result-count">{{ totalFilteredMiceCount }} mice found</span>
+    </div>
+  </div>
+
+  <!-- Tiers / Categories Container -->
+  <div class="tiers-container" *ngIf="filteredTiers.length > 0; else emptyState">
+    <div
+      class="tier-block"
+      *ngFor="let tier of filteredTiers"
+      [id]="'tier-mouse-' + tier.tier">
+
+      <!-- Tier Header -->
+      <div class="tier-header" [style.--tc]="tier.color">
+        <div class="tier-badge" [style.background]="tier.bgColor" [style.border-color]="tier.color + '30'">
+          <span class="tier-name" [style.color]="tier.color">{{ tier.tierLabel }}</span>
+        </div>
+        <span class="tier-item-count">{{ tier.items.length }} mouse{{ tier.items.length !== 1 ? 's' : '' }}</span>
+      </div>
+
+      <!-- Items Grid -->
+      <div class="items-grid">
+        <div
+          class="mouse-card"
+          *ngFor="let mouse of tier.items; let i = index"
+          [style.--tc]="tier.color"
+          [id]="'mouse-card-' + tier.tier + '-' + i">
+          
+          <div class="mouse-card-glow"></div>
+          
+          <!-- Info -->
+          <div class="mouse-info">
+            <h3 class="mouse-name">{{ mouse.name }}</h3>
+            <p class="mouse-desc">{{ mouse.description }}</p>
+          </div>
+
+          <!-- Specs Badge (Defaulting 3395 or better) -->
+          <div class="mouse-specs">
+            <span class="spec-pill">PixArt 3395</span>
+          </div>
+
+          <!-- Stores Badges -->
+          <div class="mouse-stores" *ngIf="mouse.shopee || mouse.aliexpress || mouse.lazada">
+            <span class="store-tag shopee" *ngIf="mouse.shopee">Shopee</span>
+            <span class="store-tag lazada" *ngIf="mouse.lazada">Lazada</span>
+            <span class="store-tag aliexpress" *ngIf="mouse.aliexpress">AliExpress</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <span class="empty-icon">🖱️</span>
+      <p class="empty-text">No gaming mice matches "{{ searchQuery }}" in this category.</p>
+    </div>
+  </ng-template>
+
+  <!-- Footnote / Recommendation -->
+  <div class="disclaimer">
+    <div class="disclaimer-inner">
+      <p>💡 <strong>Pro Tip:</strong> Shape, size, and hand-comfort matter significantly more than polling rate (4K/8K) or DPI numbers. Most modern mice use PixArt 3395 sensors, which offer flawless performance.</p>
+    </div>
+  </div>
+</div>

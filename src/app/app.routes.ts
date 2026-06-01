@@ -18,6 +18,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/iem-tierlist-page/iem-tierlist-page.component').then(m => m.IemTierlistPageComponent)
   },
   {
+    path: 'mouse-tierlist',
+    loadComponent: () => import('./pages/mouse-tierlist-page/mouse-tierlist-page.component').then(m => m.MouseTierlistPageComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
