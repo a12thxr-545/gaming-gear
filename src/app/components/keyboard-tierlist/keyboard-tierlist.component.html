@@ -1,0 +1,49 @@
+<section class="section" id="keyboards">
+  <div class="section-header">
+    <div class="section-badge">
+      <span class="badge-icon">🧲</span>
+      <span class="badge-label">Magnetic HE Switches</span>
+    </div>
+    <h2 class="section-title">Keyboard Recommendations</h2>
+    <p class="section-desc">Hall Effect keyboards ranked by layout — Best Budget vs Top Performance</p>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-row" *ngFor="let kb of keyboards; let i = index"
+         [style.animation-delay]="(i * 80) + 'ms'"
+         [id]="'keyboard-row-' + i">
+      <!-- Layout Badge -->
+      <div class="layout-badge" [style.--tier-color]="getLayoutColor(kb.layout)">
+        <span class="layout-label">{{ kb.layout }}</span>
+      </div>
+
+      <!-- Cards Container -->
+      <div class="cards-container">
+        <!-- Budget Card -->
+        <div class="gear-card budget-card">
+          <div class="card-tag">
+            <span class="tag-dot budget-dot"></span>
+            Best Budget
+          </div>
+          <h3 class="card-name">{{ kb.bestBudget }}</h3>
+          <p class="card-note">{{ kb.budgetNote }}</p>
+        </div>
+
+        <!-- VS Divider -->
+        <div class="vs-divider">
+          <span class="vs-text">vs</span>
+        </div>
+
+        <!-- Performance Card -->
+        <div class="gear-card perf-card">
+          <div class="card-tag">
+            <span class="tag-dot perf-dot"></span>
+            Top Performance
+          </div>
+          <h3 class="card-name">{{ kb.topPerformance }}</h3>
+          <p class="card-note">{{ kb.performanceNote }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

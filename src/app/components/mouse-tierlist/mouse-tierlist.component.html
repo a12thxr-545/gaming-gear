@@ -1,0 +1,47 @@
+<section class="section" id="mice">
+  <div class="section-header">
+    <div class="section-badge">
+      <span class="badge-icon">🖱️</span>
+      <span class="badge-label">Gaming Mice</span>
+    </div>
+    <h2 class="section-title">Mouse Recommendations</h2>
+    <p class="section-desc">Curated picks organized by category — all with 3395 sensors</p>
+  </div>
+
+  <div class="tiers-container">
+    <div class="tier-section" *ngFor="let tier of mouseTiers; let ti = index"
+         [id]="'mouse-tier-' + tier.tier">
+      <!-- Tier Header -->
+      <div class="tier-header" [style.--tier-color]="tier.color">
+        <div class="tier-label-wrapper">
+          <span class="tier-indicator"></span>
+          <h3 class="tier-label">{{ tier.tierLabel }}</h3>
+        </div>
+        <span class="tier-count">{{ tier.items.length }} mice</span>
+      </div>
+
+      <!-- Mice Grid -->
+      <div class="mice-grid">
+        <div class="mouse-card"
+             *ngFor="let mouse of tier.items; let i = index"
+             [style.animation-delay]="((ti * 100) + (i * 50)) + 'ms'"
+             [style.--tier-color]="tier.color"
+             [id]="'mouse-' + tier.tier + '-' + i">
+          <div class="mouse-info">
+            <h4 class="mouse-name">{{ mouse.name }}</h4>
+            <p class="mouse-desc">{{ mouse.description }}</p>
+          </div>
+          <div class="mouse-stores" *ngIf="mouse.shopee || mouse.aliexpress || mouse.lazada">
+            <span class="store-badge" *ngIf="mouse.shopee" title="Shopee">Shopee</span>
+            <span class="store-badge" *ngIf="mouse.aliexpress" title="AliExpress">AliExpress</span>
+            <span class="store-badge" *ngIf="mouse.lazada" title="Lazada">Lazada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-footer">
+    <p class="footer-note">💙 Most of them came with 3395 sensor which is enough. Polling rate doesn't matter as much as shape & comfort.</p>
+  </div>
+</section>

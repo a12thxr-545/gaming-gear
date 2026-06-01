@@ -1,0 +1,86 @@
+<div class="page">
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-badge">🧲 Magnetic Switches</div>
+      <h1 class="page-title">Switch Tierlist</h1>
+      <p class="page-desc">
+        100+ magnetic switches ranked by bottom wobble. Lower wobble = more accurate actuation point.
+        Tested on secret firmware for true consistency measurement.
+      </p>
+      <div class="wobble-legend">
+        <span class="legend-item" style="--lc:#ff9500">≤ 0.008mm <span class="legend-label">Elite</span></span>
+        <span class="legend-item" style="--lc:#34c759">≤ 0.015mm <span class="legend-label">Great</span></span>
+        <span class="legend-item" style="--lc:#64d2ff">≤ 0.025mm <span class="legend-label">Good</span></span>
+        <span class="legend-item" style="--lc:#5e5ce6">≤ 0.04mm <span class="legend-label">Average</span></span>
+        <span class="legend-item" style="--lc:#8e8e93">0.07mm+ <span class="legend-label">Poor</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <div class="search-inner">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search switch name…"
+          (input)="onSearch($event)"
+          id="switch-search"
+        />
+      </div>
+      <span class="result-count">{{ filteredSwitches.length }} switches</span>
+    </div>
+  </div>
+
+  <!-- Switches List -->
+  <div class="switches-container">
+    <div class="switch-card"
+         *ngFor="let sw of filteredSwitches; let i = index"
+         [style.animation-delay]="(i * 30) + 'ms'"
+         [id]="'switch-' + i">
+
+      <!-- Wobble Pill -->
+      <div class="wobble-pill" [style.color]="getWobbleColor(sw.wobble)" [style.border-color]="getWobbleColor(sw.wobble) + '40'" [style.background]="getWobbleColor(sw.wobble) + '12'">
+        <span class="wobble-value">{{ sw.wobble || '—' }}</span>
+        <span class="wobble-unit" *ngIf="sw.wobble">mm</span>
+      </div>
+
+      <!-- Main Info -->
+      <div class="switch-info">
+        <div class="switch-name">{{ sw.name }}</div>
+        <div class="switch-note" *ngIf="sw.note">{{ sw.note }}</div>
+      </div>
+
+      <!-- Recommend -->
+      <div class="switch-rec" [class]="getRecommendClass(sw.recommend)">{{ sw.recommend }}</div>
+
+      <!-- Specs -->
+      <div class="switch-specs" *ngIf="sw.totalTravel || sw.initialForce || sw.topHousing">
+        <div class="spec" *ngIf="sw.totalTravel">
+          <span class="spec-label">Travel</span>
+          <span class="spec-val">{{ sw.totalTravel }}mm</span>
+        </div>
+        <div class="spec" *ngIf="sw.initialForce">
+          <span class="spec-label">Force</span>
+          <span class="spec-val">{{ sw.initialForce }}gf</span>
+        </div>
+        <div class="spec" *ngIf="sw.stem">
+          <span class="spec-label">Stem</span>
+          <span class="spec-val">{{ sw.stem }}</span>
+        </div>
+        <div class="spec" *ngIf="sw.topHousing">
+          <span class="spec-label">Top</span>
+          <span class="spec-val">{{ sw.topHousing }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredSwitches.length === 0">
+      <span class="empty-icon">🔍</span>
+      <p>No switches found for "{{ searchQuery }}"</p>
+    </div>
+  </div>
+</div>

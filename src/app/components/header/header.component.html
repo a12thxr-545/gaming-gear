@@ -1,0 +1,32 @@
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="logo" routerLink="/" (click)="closeMenu()">
+      <span class="logo-icon">🎮</span>
+      <div class="logo-text">
+        <span class="logo-title">Best Gaming Gear</span>
+        <span class="logo-subtitle">by arthxrmorgannn</span>
+      </div>
+    </a>
+
+    <button class="menu-toggle" (click)="toggleMenu()" [class.open]="menuOpen" id="menu-toggle" aria-label="Toggle menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav class="nav" [class.open]="menuOpen">
+      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()" id="nav-home">
+        Home
+      </a>
+      <a class="nav-link" routerLink="/keyboard-tierlist" routerLinkActive="active" (click)="closeMenu()" id="nav-keyboard-tierlist">
+        ⌨️ Keyboards
+      </a>
+      <a class="nav-link" routerLink="/switch-tierlist" routerLinkActive="active" (click)="closeMenu()" id="nav-switch-tierlist">
+        🧲 Switches
+      </a>
+      <a class="nav-link" routerLink="/iem-tierlist" routerLinkActive="active" (click)="closeMenu()" id="nav-iem-tierlist">
+        🎧 IEM
+      </a>
+    </nav>
+  </div>
+</header>

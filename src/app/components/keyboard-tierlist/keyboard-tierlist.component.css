@@ -1,0 +1,213 @@
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+.section-header {
+  margin-bottom: var(--space-12);
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-primary);
+  border-radius: 100px;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.badge-icon {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: var(--space-3);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-desc {
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+  font-weight: 400;
+  max-width: 500px;
+}
+
+/* Tier Grid */
+.tier-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tier-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4);
+  animation: fadeSlideUp 0.5s ease both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Layout Badge */
+.layout-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--tier-color) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tier-color) 15%, transparent);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.layout-badge:hover {
+  background: color-mix(in srgb, var(--tier-color) 14%, transparent);
+  border-color: color-mix(in srgb, var(--tier-color) 25%, transparent);
+}
+
+.layout-label {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--tier-color);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* Cards Container */
+.cards-container {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+/* Gear Card */
+.gear-card {
+  flex: 1;
+  padding: var(--space-5);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gear-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.budget-dot {
+  background: var(--accent-green);
+  box-shadow: 0 0 6px rgba(52, 199, 89, 0.4);
+}
+
+.perf-dot {
+  background: var(--accent-orange);
+  box-shadow: 0 0 6px rgba(255, 149, 0, 0.4);
+}
+
+.card-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+.card-note {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* VS Divider */
+.vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-1);
+}
+
+.vs-text {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-10) var(--space-4);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .tier-row {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .layout-badge {
+    min-width: auto;
+    padding: var(--space-3);
+  }
+
+  .cards-container {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .vs-divider {
+    padding: var(--space-1) 0;
+  }
+}

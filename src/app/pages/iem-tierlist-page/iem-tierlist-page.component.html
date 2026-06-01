@@ -1,0 +1,126 @@
+<div class="page">
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-badge">🎧 Wallhack IEM</div>
+      <h1 class="page-title">IEM Tierlist for FPS</h1>
+      <p class="page-desc">
+        Ranked specifically for competitive FPS — footstep clarity, positional accuracy, near/mid/far distance separation.
+        Not a music ranking.
+      </p>
+      <div class="budget-recs">
+        <div class="budget-card">
+          <span class="budget-amount">฿600</span>
+          <span class="budget-name">Apple Earpods</span>
+          <span class="budget-note">Best earbud for tactical FPS</span>
+        </div>
+        <div class="budget-card">
+          <span class="budget-amount">฿1,300</span>
+          <span class="budget-name">Kefine Klean SV</span>
+          <span class="budget-note">Good for this budget, EQ-able</span>
+        </div>
+        <div class="budget-card featured">
+          <span class="budget-amount">฿7,000</span>
+          <span class="budget-name">ZiiGaat Arete 2</span>
+          <span class="budget-note">No EQ needed, great music too</span>
+        </div>
+        <div class="budget-card featured">
+          <span class="budget-amount">฿8,000</span>
+          <span class="budget-name">ZiiGaat Horizon (EQ)</span>
+          <span class="budget-note">Endgame, beats ฿20K+ IEMs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <div class="filter-group">
+        <span class="filter-label">Game</span>
+        <div class="filter-buttons">
+          <button
+            *ngFor="let game of games"
+            class="filter-btn"
+            [class.active]="activeGame === game"
+            (click)="setGame(game)"
+            [id]="'game-filter-' + game">
+            <span *ngIf="game === 'all'">All</span>
+            <span *ngIf="game === 'valorant'">Valorant</span>
+            <span *ngIf="game === 'cs2'">CS2</span>
+            <span *ngIf="game === 'pubg'">PUBG</span>
+            <span *ngIf="game === 'apex'">APEX</span>
+          </button>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search IEM name…"
+          (input)="onSearch($event)"
+          id="iem-search"
+        />
+      </div>
+      <span class="result-count">{{ filteredIems.length }} IEMs</span>
+    </div>
+  </div>
+
+  <!-- Score Legend -->
+  <div class="legend-bar">
+    <div class="legend-inner">
+      <span class="legend-title">Score Legend:</span>
+      <span class="score-pill score-s">S</span>
+      <span class="score-pill score-aplus">A+/A++</span>
+      <span class="score-pill score-a">A/A-</span>
+      <span class="score-pill score-bplus">B+</span>
+      <span class="score-pill score-b">B/B-</span>
+      <span class="score-pill score-c">C</span>
+      <span class="score-pill score-f">D/E/F</span>
+    </div>
+  </div>
+
+  <!-- IEM Cards -->
+  <div class="iems-container">
+    <div
+      class="iem-card"
+      *ngFor="let iem of filteredIems; let i = index"
+      [style.animation-delay]="(i * 30) + 'ms'"
+      [id]="'iem-' + i">
+
+      <!-- Name + Price -->
+      <div class="iem-header">
+        <div class="iem-name">{{ iem.name }}</div>
+        <div class="iem-price" *ngIf="iem.price">{{ formatPrice(iem.price) }}</div>
+      </div>
+
+      <!-- Game Scores Row -->
+      <div class="scores-row">
+        <div class="score-cell" *ngFor="let game of ['valorant','cs2','pubg','apex']">
+          <span class="score-game-label">{{ game | uppercase }}</span>
+          <span class="score-badge" [class]="getScoreClass(getGameScore(iem, game))" *ngIf="getGameScore(iem, game); else emptyScore">
+            {{ getGameScore(iem, game) }}
+          </span>
+          <ng-template #emptyScore><span class="score-empty">—</span></ng-template>
+        </div>
+      </div>
+
+      <!-- Comment -->
+      <div class="iem-comment" *ngIf="iem.comment">{{ iem.comment }}</div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredIems.length === 0">
+      <span class="empty-icon">🎧</span>
+      <p>No IEMs found matching your search.</p>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <div class="disclaimer-inner">
+      <p>🎵 This tier is for <strong>FPS gaming</strong>, not music listening. Everyone's ear shape and music preferences differ — try before you buy when possible.</p>
+      <p>If you can't find the IEM, press <kbd>Ctrl+F</kbd> to search on the original spreadsheet.</p>
+    </div>
+  </div>
+</div>

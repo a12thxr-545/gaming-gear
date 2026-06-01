@@ -1,0 +1,91 @@
+<div class="page">
+  <!-- Page Header -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-badge">⌨️ Magnetic HE Keyboards</div>
+      <h1 class="page-title">Keyboard Tierlist</h1>
+      <p class="page-desc">
+        200+ keyboards ranked SSS → F by latency, firmware quality, price and build.
+        Scoring: Performance 40% · Price 30% · Features 20% · Build 10%
+      </p>
+      <p class="page-meta">Updated: 26 May 2026 · Source: Ponnie Review</p>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <div class="filter-group">
+        <span class="filter-label">Layout</span>
+        <div class="filter-buttons">
+          <button
+            *ngFor="let layout of layouts"
+            class="filter-btn"
+            [class.active]="activeFilter === layout"
+            (click)="setFilter(layout)"
+            [id]="'filter-' + layout">
+            {{ layout === 'all' ? 'All' : layout }}
+          </button>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search brand or model…"
+          (input)="onSearch($event)"
+          id="keyboard-search"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Tiers -->
+  <div class="tiers-container">
+    <div
+      class="tier-block"
+      *ngFor="let group of tierGroups"
+      [id]="'tier-' + group.tier"
+      [style.display]="hasVisibleItems(group) ? 'block' : 'none'">
+
+      <!-- Tier Header -->
+      <div class="tier-header" [style.--tc]="group.color">
+        <div class="tier-badge" [style.background]="group.color + '18'" [style.border-color]="group.color + '30'">
+          <span class="tier-name" [style.color]="group.color">{{ group.tier }}</span>
+        </div>
+        <span class="tier-item-count">{{ filteredItems(group).length }} keyboard{{ filteredItems(group).length !== 1 ? 's' : '' }}</span>
+      </div>
+
+      <!-- Items Table -->
+      <div class="items-grid">
+        <div
+          class="kb-card"
+          *ngFor="let item of filteredItems(group); let i = index"
+          [style.--tc]="group.color"
+          [id]="'kb-' + group.tier + '-' + i">
+          <!-- Rec badge -->
+          <div class="rec-badge" [class]="getRecommendClass(item.recommend)">
+            {{ item.recommend }}
+          </div>
+          <div class="kb-info">
+            <div class="kb-brand">{{ item.brand }}</div>
+            <div class="kb-model">{{ item.model }}</div>
+            <div class="kb-note">{{ item.note }}</div>
+          </div>
+          <div class="kb-meta">
+            <span class="kb-layout">{{ item.layout }}</span>
+            <span class="kb-price" *ngIf="item.price">{{ item.price }}</span>
+            <span class="kb-dev" *ngIf="item.developer">{{ item.developer }}</span>
+          </div>
+          <div class="kb-stores">
+            <span class="store-tag shopee" *ngIf="item.shopee">Shopee</span>
+            <span class="store-tag taobao" *ngIf="item.taobao">Taobao</span>
+            <span class="store-tag official" *ngIf="item.official">Official</span>
+            <span class="store-tag aliexpress" *ngIf="item.aliexpress">AliExpress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
