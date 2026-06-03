@@ -43,7 +43,7 @@
          [id]="'switch-' + i">
 
       <!-- Wobble Pill -->
-      <div class="wobble-pill" [style.color]="getWobbleColor(sw.wobble)" [style.border-color]="getWobbleColor(sw.wobble) + '40'" [style.background]="getWobbleColor(sw.wobble) + '12'">
+      <div [class]="'wobble-pill ' + getWobbleClass(sw.wobble)">
         <span class="wobble-value">{{ sw.wobble || '—' }}</span>
         <span class="wobble-unit" *ngIf="sw.wobble">mm</span>
       </div>

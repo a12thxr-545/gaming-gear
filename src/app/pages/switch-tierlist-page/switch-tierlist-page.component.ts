@@ -53,4 +53,14 @@ export class SwitchTierlistPageComponent implements OnInit {
     if (v <= 0.04) return '#5e5ce6';
     return '#8e8e93';
   }
+
+  getWobbleClass(wobble: string): string {
+    const v = parseFloat(wobble);
+    if (!wobble || isNaN(v)) return 'wobble-poor';
+    if (v <= 0.008) return 'wobble-elite';
+    if (v <= 0.015) return 'wobble-great';
+    if (v <= 0.025) return 'wobble-good';
+    if (v <= 0.04) return 'wobble-average';
+    return 'wobble-poor';
+  }
 }
